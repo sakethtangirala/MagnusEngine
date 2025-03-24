@@ -1,0 +1,33 @@
+# Ignore build directories
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/Debian/
+/Makefile
+
+# Ignore IDE and editor specific files
+.vscode/
+/.idea/
+
+# Ignore compiled object files and binaries
+*.o
+*.obj
+*.so
+*.exe
+*.out
+*.dll
+*.lib
+*.a
+*.pdb
+*.idb
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore dependencies fetched via FetchContent (like glfw and glad)
+_deps/
+
+# Ignore other common temporary files
+*.swp
+*.swo
