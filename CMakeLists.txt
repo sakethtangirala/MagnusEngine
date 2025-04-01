@@ -22,14 +22,12 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(glad)
 
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
-
-# Fetch and include GLM
 FetchContent_Declare(
-  glm
-  GIT_REPOSITORY https://github.com/g-truc/glm.git
-  GIT_TAG        0.9.9.8
+  cglm
+  GIT_REPOSITORY https://github.com/recp/cglm.git
+  GIT_TAG        v0.9.2
 )
-FetchContent_MakeAvailable(glm)
+FetchContent_MakeAvailable(cglm)
 
 # Fetch and include Bullet Physics
 FetchContent_Declare(
@@ -55,20 +53,21 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(stb)
 
-# Include necessary directories
-include_directories(${CMAKE_SOURCE_DIR}/include)
-include_directories(${glad_SOURCE_DIR}/include)
-include_directories(${glfw_SOURCE_DIR}/include)
-include_directories(${glm_SOURCE_DIR})
-include_directories(${bullet_SOURCE_DIR}/src)
-include_directories(${assimp_SOURCE_DIR}/include)
-include_directories(${stb_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR}/include)  # For your custom include folder
+include_directories(${glad_SOURCE_DIR}/include)   # glad includes
+include_directories(${glfw_SOURCE_DIR}/include)   # glfw includes
+include_directories(${glm_SOURCE_DIR})            # glm (header-only)
+include_directories(${bullet_SOURCE_DIR}/src)    # Bullet physics includes
+include_directories(${assimp_SOURCE_DIR}/include) # Assimp includes
+include_directories(${stb_SOURCE_DIR})            # stb includes
+
+
 
 # Find OpenGL
 find_package(OpenGL REQUIRED)
 
 # Add executable
-add_executable(main src/main.c src/glad.c)
+add_executable(main src/main.cpp src/glad.c src/Camera.c)
 
 # Link necessary libraries
-target_link_libraries(main PRIVATE glfw OpenGL::GL glm BulletDynamics BulletCollision LinearMath assimp)
+target_link_libraries(main PRIVATE glfw OpenGL::GL cglm BulletDynamics BulletCollision LinearMath assimp)
