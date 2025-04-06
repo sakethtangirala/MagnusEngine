@@ -15,10 +15,18 @@ typedef struct {
     float sensitivity;
 } Camera;
 
-void camera_init(Camera* camera, float startPosition[3]);
+typedef enum {
+    FORWARD,
+    BACKWARD,
+    LEFT,
+    RIGHT
+} Camera_Movement;
+
+void camera_init(Camera* camera, float position[3]);
 void camera_get_view_matrix(Camera* camera, float view[16]);
 void camera_process_keyboard(Camera* camera, int key, float deltaTime);
 void camera_process_mouse_movement(Camera* camera, float xOffset, float yOffset);
+void camera_update_direction(Camera* camera);
 
 #ifdef __cplusplus
 }
